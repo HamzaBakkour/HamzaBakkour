@@ -54,7 +54,7 @@ function HamzaBakkour(){
                             The{' '}
                             <a style={{textDecoration: "none",
                                         color: "#050836"}}
-                                        target="_blank" href="https://funnyshop.hamzabakkour.se"
+                                        target="_blank" href="https://github.com/HamzaBakkour/HamzaBakkour"
                                         class="external">
                                         full source code</a>{' '}
                             is available on github.
