@@ -8,7 +8,7 @@ import Frame from 'react-frame-component';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 
@@ -28,14 +28,22 @@ const StyledTextBody = styled.h4`
     font-weight: 300;
 `;
 
+const StyledTextBodyBadge = styled.h4`
+    font-family: Kanit, sans-serif;
+    font-weight: 600;
+`;
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 function FunnyShop(){
 
-    const [funnyshopCodeSnippet, setFunnyshopCodeSnippet] = useState(null);
-    const [badgeHoverColor, setBadgeHoverColor] = useState(0);
-    const [badgeLastActive, setBadgeLastActive] = useState(0);
-    const [codeSnippetDiscription, setCodeSnippetDiscription] = useState("");
-
+    const [activebadge, setActivebadge] = useState(1);
+    const [codeSnippetDiscription, setCodeSnippetDiscription] = useState("The Nginx configuration file");
+    const primaryBadgeColor = "#FDF6E3";
+    const secondaryBadgeColor = "#8a2191";
+    const badgeTextColor = "black";
 
     return(
         <div className="pt-5 my-0 px-5 pb-5 funnyshop-style"
@@ -43,7 +51,7 @@ function FunnyShop(){
             height: "auto",
             overflow: "hidden",
         }}>
-            <p className="pt-5"
+            <div className="pt-5"
             style={{ color: "white",
             }}>
                 <StyledTextHead>
@@ -54,12 +62,12 @@ function FunnyShop(){
                     Overview
                     </div>
                 </StyledTextSecondHead>
-            </p>
-            <p style={{ color: "white"}}>
+            </div>
+            <div style={{ color: "white"}}>
                 <p>
                     <StyledTextBody>
                         The website is availible at{' '} 
-                        <a style={{textDecoration: "none"}} target="_blank" href="https://funnyshop.hamzabakkour.se" class="external link-primary">hamzabakkour.funnyshop.se</a>.
+                        <a style={{textDecoration: "none", fontWeight: "bold"}} target="_blank" href="https://funnyshop.hamzabakkour.se" class="external link-primary">hamzabakkour.funnyshop.se</a>.
                         <br/>
                         You can use the website to buy pokemon cards. Each card shows the name and the picture of a pokemon along with some stats.
                         <br/>
@@ -104,7 +112,7 @@ function FunnyShop(){
                         <br/>
                         All these services are containerized using Docker.
                         <br/>
-                        Kubernetes deployments fetch these services images from a private Docker repository.
+                        Kubernetes deployments fetch the images for these services from a private Docker repository.
                     </StyledTextBody>
                 </p>
                 <Figure className="d-flex flex-column justify-content-center align-items-center pt-4">
@@ -141,9 +149,9 @@ function FunnyShop(){
                     }}>
                         <Row>
                             <Col>
-                                <p>
+                                <div>
                                     <StyledTextBody>
-                                        The{' '} <a style={{textDecoration: "none"}} target="_blank" href="https://github.com/HamzaBakkour/FunnyShop/tree/main" class="external link-primary">full source code</a>{' '}
+                                        The{' '} <a style={{textDecoration: "none", fontWeight: "bold"}} target="_blank" href="https://github.com/HamzaBakkour/FunnyShop/tree/main" class="external link-primary">full source code</a>{' '}
                                         is available at github.
                                         <br/>
                                         The website is written using Django and React.
@@ -152,100 +160,95 @@ function FunnyShop(){
                                         The React application is deployed with{' '} 
                                         <Badge
                                         as={Button}
-                                        bg={ (badgeHoverColor === 1 || badgeLastActive === 1) ? "#340438" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(1); setBadgeLastActive(1);setFunnyshopCodeSnippet("nginx.conf"); setCodeSnippetDiscription("The Nginx configuration file")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={ (activebadge === 1 ) ? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(1); setCodeSnippetDiscription("The Nginx configuration file")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor:  (badgeHoverColor === 1 || badgeLastActive === 1) ? "#340438" : "primary",
+                                            backgroundColor:  (activebadge === 1 ) ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
-                                            <strong>Nginx</strong>
-                                            
-                                            </StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
+                                            Nginx
+                                            </StyledTextBodyBadge>
                                         </Badge>
                                         <br/>
                                         An{' '}
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 2 || badgeLastActive === 2) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(2); setBadgeLastActive(2); setFunnyshopCodeSnippet("nginx-ingress.yaml"); setCodeSnippetDiscription("The Nginx ingress file")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 2) ? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(2); setCodeSnippetDiscription("The Nginx ingress file")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 2 || badgeLastActive === 2) ? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 2 ) ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                                 ingress service
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
+
                                         is used to expose HTTP route to the{' '}
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 3 || badgeLastActive === 3) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(3); setBadgeLastActive(3);setFunnyshopCodeSnippet("nginx-service.yaml"); setCodeSnippetDiscription("The Nginx service file")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 3) ? secondaryBadgeColor : primaryBadgeColor }
+                                        onMouseEnter = {() => {setActivebadge(3); setCodeSnippetDiscription("The Nginx service file")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 3 || badgeLastActive === 3) ? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 3) ? secondaryBadgeColor  : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                                 Nginx service
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         <br/>
                                         All HTTP traffic is redirected into HTTPS by the{' '}
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 4 || badgeLastActive === 4) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(4); setBadgeLastActive(4);setFunnyshopCodeSnippet("nginx-ingress.yaml"); setCodeSnippetDiscription("The Nginx service file")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 4) ? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(4); setCodeSnippetDiscription("The Nginx ingress file")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 4 || badgeLastActive === 4) ? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 4)  ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                                 ingress service
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         <br/>
                                         React communicates with the backend REST API through a{' '}
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 5 || badgeLastActive === 5)  ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(5); setBadgeLastActive(5); setFunnyshopCodeSnippet("backend-service.yaml");  setCodeSnippetDiscription("The Django service file")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 5) ? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(5); setCodeSnippetDiscription("The Django service file")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 5 || badgeLastActive === 5)  ? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 5)  ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                                 Cluster IP service
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         <br/>
                                         The full API documentaion is available{' '}
-                                        <a style={{textDecoration: "none"}} target="_blank" href="https://funnyshop.hamzabakkour.se/api/schema/swagger-ui/#/" class="external link-primary">here.</a>{' '}
+                                        <a style={{textDecoration: "none", fontWeight: "bold"}} target="_blank" href="https://funnyshop.hamzabakkour.se/api/schema/swagger-ui/#/" class="external link-primary">here</a>.{' '}
                                         <br/>
                                         <br/>
                                         
@@ -255,20 +258,19 @@ function FunnyShop(){
                                         
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 6 || badgeLastActive === 6) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(6); setBadgeLastActive(6); setFunnyshopCodeSnippet("order-email-task.py");  setCodeSnippetDiscription("Sending email when order placed task")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 6)  ? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(6); setCodeSnippetDiscription("Sending email when order placed task")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor:(badgeHoverColor === 6 || badgeLastActive === 6) ? "#2b032e" : "primary",
+                                            backgroundColor:(activebadge === 6) ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                                 first task
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         is sending an email with the order details when the user place an order.
                                         <br/>
@@ -276,20 +278,19 @@ function FunnyShop(){
                                         
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 7 || badgeLastActive === 7)? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(7); setBadgeLastActive(7); setFunnyshopCodeSnippet("payment-email-task.py"); setCodeSnippetDiscription("Sending email when order is payed task")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 7) ? secondaryBadgeColor :primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(7); setCodeSnippetDiscription("Sending email when order is payed task")}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 7 || badgeLastActive === 7) ? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 7) ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                                 second task
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         is sending an email when the user pays for the order.
                                         <br/>
@@ -300,58 +301,55 @@ function FunnyShop(){
                                         <br/>
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 8 || badgeLastActive === 8) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(8); setBadgeLastActive(8); setFunnyshopCodeSnippet("backend-deployment.yaml"); setCodeSnippetDiscription("Backend deployment")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 8)  ? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(8); setCodeSnippetDiscription("Backend deployment");}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 8 || badgeLastActive === 8)? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 8) ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                             The first
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         deployment is for Django, Stripe and Celery{' '}
                                         <br/>
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 9 || badgeLastActive === 9) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(9); setBadgeLastActive(9); setFunnyshopCodeSnippet("nginx-deployment.yaml"); setCodeSnippetDiscription("Nginx deployment")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 9)? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(9); setCodeSnippetDiscription("Nginx deployment");}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 9 || badgeLastActive === 9)? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 9) ? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                             The second
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         deployment is for Nginx{' '}
                                         <br/>
                                         <Badge
                                         as={Button}
-                                        bg={(badgeHoverColor === 10 || badgeLastActive === 10) ? "#2b032e" : "primary"}
-                                        onMouseEnter = {() => {setBadgeHoverColor(10); setBadgeLastActive(10); setFunnyshopCodeSnippet("rabbitmq-deployment.yaml"); setCodeSnippetDiscription("RabbitMQ deployment")}}
-                                        onMouseLeave = {() => setBadgeHoverColor(0)}
+                                        bg={(activebadge === 10)? secondaryBadgeColor : primaryBadgeColor}
+                                        onMouseEnter = {() => {setActivebadge(10); setCodeSnippetDiscription("RabbitMQ deployment");}}
                                         style={{
                                             height: "29px",
                                             border: "0px",
-                                            backgroundColor: (badgeHoverColor === 10 || badgeLastActive === 10) ? "#2b032e" : "primary",
+                                            backgroundColor: (activebadge === 10)? secondaryBadgeColor : primaryBadgeColor,
                                             padding: "5px",
                                             paddingTop: "0px"
                                         }}
                                         >
-                                            <StyledTextBody>
+                                            <StyledTextBodyBadge style={{color:  badgeTextColor}}>
                                             The third
-                                            </StyledTextBody>
+                                            </StyledTextBodyBadge>
                                         </Badge>{' '}
                                         is for RabbitMQ{' '}
                                         <br/>
@@ -359,7 +357,7 @@ function FunnyShop(){
                                         
                                         
                                     </StyledTextBody>
-                                </p>
+                                </div>
                             </Col>
                             <Col className="pt-0 m-0"
                             style={{
@@ -372,6 +370,8 @@ function FunnyShop(){
                                         {codeSnippetDiscription}
                                     </StyledTextBody>
                                 </div>
+
+                                {(activebadge === 1) &&
                                 <Frame
                                 className="p-0 m-0 pt-0"
                                 style={{
@@ -384,25 +384,298 @@ function FunnyShop(){
                                 <html>
                                 <head><base target='_blank' /></head>
                                 <body>
-                                    <style>
-                                        @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
-                                        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-                                        body {
-                                        font: 10px 'Open Sans', sans-serif;
-                                        mergin: 0px;
-                                        padding: 0px;
-                                        }
-                                    </style>
-                                    <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=${funnyshopCodeSnippet}"></script>
-                                    </script>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=nginx.conf"></script>
+                                    <div>
                                 </body>
                                 </html>`}
                                 />
+                                }
+
+                                {(activebadge === 2) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=nginx-ingress.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 3) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=nginx-service.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 4) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=nginx-ingress.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 5) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=backend-service.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 6) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=order-email-task.py"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 7) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=payment-email-task.py"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 8) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=backend-deployment.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 9) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=nginx-deployment.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
+                                {(activebadge === 10) &&
+                                <Frame
+                                className="p-0 m-0 pt-0"
+                                style={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                height: '1500px',
+                                }}
+                                initialContent={`
+                                <!DOCTYPE html>
+                                <html>
+                                <head><base target='_blank' /></head>
+                                <body>
+                                    <div id="root">
+                                        <style>
+                                            @import url('https://cdn.rawgit.com/lonekorean/gist-syntax-themes/d49b91b3/stylesheets/solarized-light.css');
+                                            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+                                            body {
+                                            font: 10px 'Open Sans', sans-serif;
+                                            mergin: 0px;
+                                            padding: 0px;
+                                            }
+                                        </style>
+                                        <script src="https://gist.github.com/HamzaBakkour/68c7c7fa30ccc516430f029d5dcc1610.js?file=rabbitmq-deployment.yaml"></script>
+                                    <div>
+                                </body>
+                                </html>`}
+                                />
+                                }
+
                             </Col>
                         </Row>
                     </Container>
                 </Container>
-            </p>
+            </div>
             <div className="p-4"/>
         </div>
     )

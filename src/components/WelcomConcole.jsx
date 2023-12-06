@@ -32,47 +32,40 @@ function WelcomConsole(){
             height: "90vh",
             width: "100%"
         }}>
-                <div className="px-4 mt-4 ">
-                    <span className="px-2">
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        color="#80340b"
-                        width="40"
-                        height="40"
-                        fill="currentColor"
-                        class="bi bi-circle-fill"
-                        viewBox="0 0 16 16">
-                            <circle cx="8" cy="8" r="8"/>
-                        </svg>
-                    </span>
+            <div className="px-4 mt-4 ">
 
-                    <span className="px-2">
+                <div className="d-flex flex-row">
 
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="#915b0f"
-                    width="40"
-                    height="40"
-                    fill="currentColor"
-                    class="bi bi-circle-fill"
-                    viewBox="0 0 16 16">
-                        <circle cx="8" cy="8" r="8"/>
-                    </svg>
-                    </span>
+                    <div class="mx-1 circle-red change-color-red"
+                    style={{
+                        shadowOffset: { width: 20, height:20 },
+                        shadowOpacity: 5,
+                        shadowRadius: 5,
+                        boxShadow: '0px 0px 10px #F4AAB9',
+                    }}
+                    />
+
+                    <div class="mx-1 circle-green change-color-orange"
+                    style={{
+                        shadowOffset: { width: 20, height:20 },
+                        shadowOpacity: 5,
+                        shadowRadius: 5,
+                        boxShadow: '0px 0px 10px #F4AAB9',
+                    }}
+                    />
+
+                    <div class="mx-1 circle-orange change-color-green"
+                    style={{
+                        shadowOffset: { width: 20, height:20 },
+                        shadowOpacity: 5,
+                        shadowRadius: 5,
+                        boxShadow: '0px 0px 10px #F4AAB9',
+                    }}
+                    />
+
+                </div>
 
 
-                    <span className="px-2">
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="#398510"
-                    width="40"
-                    height="40"
-                    fill="currentColor"
-                    class="bi bi-circle-fill"
-                    viewBox="0 0 16 16">
-                        <circle cx="8" cy="8" r="8"/>
-                    </svg>
-                    </span>
                 </div>
 
 
@@ -91,24 +84,26 @@ function WelcomConsole(){
 
                 <div>
                     <h1 className="p-2"
-                        style={{ color: "white",
+                        style={{ color: "green",
                         fontFamily: "Lucida Console",
+                        textShadow: "green 1px 0 10px"
                         }}>
 
                         <StyledText>
                         <Typewriter
                             onInit={(typewriter) => {
                                 typewriter
-                                    .pauseFor(randomNumber(3000, 4000))
-                                    .typeString("Hello")
-                                    .pauseFor(randomNumber(1000, 2000))
+                                    .pauseFor(randomNumber(100, 400))
+                                    .typeString("Greetings")
+                                    .pauseFor(randomNumber(100, 400))
                                     .typeString(" and thank you")
                                     .pauseFor(randomNumber(100, 400))
-                                    .typeString(" for vesting")
+                                    .typeString("  for visiting")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" my website.")
                                     .typeString("<br/>")
-                                    .pauseFor(randomNumber(1500, 2000))
+                                    .pauseFor(randomNumber(500, 1000))
+                                    .typeString("<br/>")
                                     .typeString("Next")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" you are going")
@@ -117,8 +112,8 @@ function WelcomConsole(){
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" with two projects")
                                     .pauseFor(randomNumber(100, 400))
-                                    .typeString(" that I’ve made.")
-                                    .pauseFor(randomNumber(1000, 2000))
+                                    .typeString(" that I’ve developed.")
+                                    .pauseFor(randomNumber(500, 1000))
                                     .typeString("<br/>")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString("<br/>")
@@ -128,18 +123,20 @@ function WelcomConsole(){
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" deployed on")
                                     .pauseFor(randomNumber(100, 400))
-                                    .typeString(" Amazon Elastic Kubernetes Service.")
+                                    .typeString(" Amazon Elastic")
+                                    .pauseFor(randomNumber(100, 400))
+                                    .typeString(" Kubernetes Service (EKS).")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString("<br/>")
-                                    .pauseFor(randomNumber(2000, 3000))
-                                    .pauseFor(randomNumber(100, 400))
+                                    .typeString("<br/>")
+                                    .pauseFor(randomNumber(500, 1000))
                                     .typeString("The second")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" is a social website")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" deployed on")
                                     .pauseFor(randomNumber(100, 400))
-                                    .typeString(" Amazon Elastic")
+                                    .typeString(" an Amazon Elastic")
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString(" Compute Cloud")
                                     .pauseFor(randomNumber(100, 400))
@@ -149,14 +146,21 @@ function WelcomConsole(){
                                     .pauseFor(randomNumber(100, 400))
                                     .typeString("<br/>")
                                     .typeString("<br/>")
-                                    .pauseFor(randomNumber(2000, 3000))
-                                    .typeString("Please scroll down")
+                                    .pauseFor(randomNumber(1500, 2000))
+                                    .typeString("Feel free to scroll down")
                                     .pauseFor(randomNumber(100, 400))
-                                    .typeString(" to continue ")
+                                    .typeString(" to explore these")
+                                    .pauseFor(randomNumber(100, 400))
+                                    .typeString(" projects further.")
+                                    .typeString("<br/>")
+                                    .typeString("<br/>")
+                                    .typeString("  Your interest is")
+                                    .pauseFor(randomNumber(100, 400))
+                                    .typeString("  much appreciated!")
                                     .start();
                             }}
                             options={{
-                                delay: 70,
+                                delay: 60,
                             }}
                             />
                         </StyledText>
@@ -169,4 +173,3 @@ function WelcomConsole(){
 }
 
 export default WelcomConsole
-

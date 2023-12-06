@@ -2,6 +2,7 @@ import WelcomConsole from "../components/WelcomConcole";
 import FunnyShop from "../components/FunnyShop";
 import Postgram from "../components/Postgram";
 import HamzaBakkour from "../components/HamzaBakkour";
+import AboutMe from "../components/AboutMe";
 
 function Home(){
 
@@ -11,6 +12,7 @@ function Home(){
                 <FunnyShop/>
                 <Postgram/>
                 <HamzaBakkour/>
+                <AboutMe/>
             </div>
         );
 

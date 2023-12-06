@@ -2,8 +2,6 @@ import "./hamzabakkour.css"
 import styled from "styled-components";
 
 
-
-
 const StyledTextHead = styled.h1`
     font-family: Kanit, sans-serif;
     font-weight: 600;
@@ -45,7 +43,7 @@ function HamzaBakkour(){
                             As you already know its available at{' '}
                             <a style={{
                                 textDecoration: "none",
-                                color: "#050836"}}
+                                color: "#050836", fontWeight: "bold"}}
                             target="_blank"
                             href="https://hamzabakkour.se"
                             class="external ">hamzabakkour.se</a>
@@ -53,7 +51,7 @@ function HamzaBakkour(){
                             <br/>
                             The{' '}
                             <a style={{textDecoration: "none",
-                                        color: "#050836"}}
+                                        color: "#050836", fontWeight: "bold"}}
                                         target="_blank" href="https://github.com/HamzaBakkour/HamzaBakkour"
                                         class="external">
                                         full source code</a>{' '}

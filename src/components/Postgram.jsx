@@ -48,7 +48,7 @@ return(
             <p>
                 <StyledTextBody>
                     The website is availible at{' '} 
-                    <a style={{textDecoration: "none"}} target="_blank" href="https://postgram.hamzabakkour.se/login" class="external link-primary">postgram.hamzabakkour.se</a>.
+                    <a style={{textDecoration: "none", fontWeight: "bold"}} target="_blank" href="https://postgram.hamzabakkour.se/login" class="external link-primary">postgram.hamzabakkour.se</a>.
                     <br/>
                     You use your email to create an account. Once logged in, you can create posts and interact with other users' posts.
                     <br/>
@@ -144,7 +144,7 @@ return(
 
                     <StyledTextBody>
                         The {' '}
-                        <a style={{textDecoration: "none"}} target="_blank" href="https://github.com/HamzaBakkour/Postgram/" class="external link-primary">full source code</a>{' '}
+                        <a style={{textDecoration: "none", fontWeight: "bold"}} target="_blank" href="https://github.com/HamzaBakkour/Postgram/" class="external link-primary">full source code</a>{' '}
                         is available at github.
                         <br/>
                         The website is written using Django and React. The React application is deployed with Nginx.
@@ -152,7 +152,7 @@ return(
                         The Django container exposes port 8000, which React utilizes to communicate with the backend API.
                         <br/>
                         The full API documentaion is available{' '}
-                        <a style={{textDecoration: "none"}} target="_blank" href="https://postgram.hamzabakkour.se/api/schema/swagger-ui/#/" class="external link-primary">here</a>.
+                        <a style={{textDecoration: "none", fontWeight: "bold"}} target="_blank" href="https://postgram.hamzabakkour.se/api/schema/swagger-ui/#/" class="external link-primary">here</a>.
                     </StyledTextBody>
                 </p>
             </p>
